@@ -2,6 +2,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"os"
@@ -10,8 +11,8 @@ import (
 )
 
 func getReader() io.Reader {
-	if len(os.Args) > 1 {
-		r, err := os.Open(os.Args[1])
+	if len(flag.Args()) > 0 {
+		r, err := os.Open(flag.Arg(0))
 		if err != nil {
 			fmt.Println("error opening file:", err)
 			os.Exit(66) // cannot open input
@@ -32,8 +33,14 @@ func sum512_256(data io.Reader) []byte {
 }
 
 func main() {
-	if len(os.Args) > 2 {
-		fmt.Println("usage:", os.Args[0], "[file]")
+	flag.Usage = func() {
+		fmt.Fprintln(flag.CommandLine.Output(), "usage:", os.Args[0], "[file]")
+		flag.PrintDefaults()
+	}
+	flag.Parse()
+
+	if len(flag.Args()) > 1 {
+		flag.Usage()
 		os.Exit(64) // command line usage error
 	}
 
