@@ -34,7 +34,7 @@ func sum512_256(data io.Reader) []byte {
 
 func main() {
 	flag.Usage = func() {
-		fmt.Fprintln(flag.CommandLine.Output(), "usage:", os.Args[0], "[file]")
+		fmt.Fprintln(os.Stderr, "usage:", os.Args[0], "[file]")
 		flag.PrintDefaults()
 	}
 	flag.Parse()
