@@ -1,4 +1,4 @@
-// Package sha512_265 calculates the sha512_265 hash for STDIN or first file argument.
+// Package sha512_256 calculates the sha512_256 hash for STDIN or first file argument.
 package main
 
 import (
